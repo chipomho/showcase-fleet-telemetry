@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: fleet-telemetry
+  threads:
+    virtual:
+      enabled: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/fleet
+    username: fleet
+    password: fleet
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  sql:
+    init:
+      mode: always
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+fleet:
+  allowed-origins: ${ALLOWED_ORIGINS:https://fleet-dashboard.showcases.chipomho.local}
+  simulator:
+    enabled: true
+    trucks: 6
+    tick: 1s
+    time-scale: 4
+  alerts:
+    window: 30s
+    minimum-readings: 3
