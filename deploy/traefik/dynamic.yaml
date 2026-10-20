@@ -1,0 +1,20 @@
+http:
+  routers:
+    fleet-telemetry-api:
+      rule: Host(`fleet-telemetry-api.showcases.chipomho.local`)
+      entryPoints: [websecure]
+      service: fleet-telemetry-api
+      tls: {}
+
+  services:
+    fleet-telemetry-api:
+      loadBalancer:
+        servers:
+          - url: http://api:8080
+
+tls:
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /certs/showcases.crt
+        keyFile: /certs/showcases.key
